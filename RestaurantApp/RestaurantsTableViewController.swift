@@ -11,7 +11,6 @@ import UIKit
 class RestaurantsTableViewController: UITableViewController {
 
     var resNameList = ["咖啡胡同", "霍米", "茶.家", "洛伊斯咖啡", "贝蒂生蚝", "福奇餐馆", "阿波画室", "伯克街面包坊", "黑氏巧克力", "惠灵顿雪梨", "北州", "布鲁克林塔菲", "格雷厄姆大街肉", "华夫饼 & 沃夫", "五叶", "眼光咖啡", "忏悔", "巴拉菲娜", "多尼西亚", "皇家橡树", "泰咖啡"]
-
     
     var resImgList =
         ["cafedeadend.jpg", "homei.jpg", "teakha.jpg", "cafeloisl.jpg", "petiteoyster.jpg", "forkeerestaurant.jpg", "posatelier.jpg", "bourkestreetbakery.jpg", "haighschocolate.jpg", "palominoespresso.jpg", "upstate.jpg", "traif.jpg", "grahamavenuemeats.jpg", "wafflewolf.jpg", "fiveleaves.jpg", "cafelore.jpg", "confessional.jpg", "barrafina.jpg", "donostia.jpg", "royaloak.jpg", "thaicafe.jpg"]
@@ -19,7 +18,9 @@ class RestaurantsTableViewController: UITableViewController {
     var resLocation = ["香港", "香港", "香港", "香港", "香港", "香港", "香港", "悉尼", "悉尼", "悉尼", "纽约", "纽约", "纽约", "纽约", "纽约", "纽约", "纽约", "伦敦", "伦敦", "伦敦", "伦敦"]
     
     var resType = ["咖啡 & 茶店","咖啡", "茶屋", "奥地利式 & 休闲饮料","法式", "面包房", "面包房", "巧克力", "咖啡", "美式 & 海鲜", "美式", "美式","早餐 & 早午餐", "法式 & 茶", "咖啡 & 茶", "拉丁美式", "西班牙式", "西班牙式", "西班牙式", "英式", "泰式"]
-
+    
+    var resHasBM = [Bool](count:21,repeatedValue: false)
+    
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
@@ -50,7 +51,43 @@ class RestaurantsTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return resNameList.count
     }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let listMenu = UIAlertController(title: nil, message: "选择", preferredStyle: .ActionSheet)
+        let cancalAction = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
+        
+        let dail = {
+            (action: UIAlertAction) -> Void in
+            let alert = UIAlertController(title: "提示", message: "您无权拨打此号码！", preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alert.addAction(okAction)
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+        
+        let dailAction = UIAlertAction(title: "拨打 66\(indexPath.row + 1)", style: .Default, handler: dail)
+        
+        let bookmarkAction = UIAlertAction(title: "收藏", style: .Default) { (_) in
+            let cell = tableView.cellForRowAtIndexPath(indexPath)
+            cell?.viewWithTag(1)?.hidden = false
+            //cell?.accessoryType = UITableViewCellAccessoryType.Checkmark
+            //cell?.accessoryView
+            self.resHasBM[indexPath.row] = true
+        }
+        
+        let unbookmarkAction = UIAlertAction(title: "取消收藏", style: .Default) { (_) in
+            let cell = tableView.cellForRowAtIndexPath(indexPath)
+            cell?.viewWithTag(1)?.hidden = true
+            //cell?.accessoryType = UITableViewCellAccessoryType.None
+            self.resHasBM[indexPath.row] = false
+        }
 
+        
+        listMenu.addAction(cancalAction)
+        listMenu.addAction(dailAction)
+        resHasBM[indexPath.row] ? listMenu.addAction(unbookmarkAction) : listMenu.addAction(bookmarkAction)
+        
+        self.presentViewController(listMenu, animated: true, completion: nil)
+    }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! CustomTableViewCell
@@ -62,11 +99,14 @@ class RestaurantsTableViewController: UITableViewController {
             //cell.restaurantImage.frame.size.width / 2
         cell.restaurantImage.clipsToBounds = true
         
+        //cell.accessoryType = resHasBM[indexPath.row] ? .Checkmark : .None
+        
         cell.restaurantImage?.image = UIImage(named: resImgList[indexPath.row])
+        cell.heartImage.image = UIImage(named: "heart")
+        //cell.bookmarkImage.hidden = !resHasBM[indexPath.row]
         return cell
     }
     
-
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {

@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -93,10 +94,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="80" id="15O-NS-Q8S" customClass="CustomTableViewCell" customModule="RestaurantApp" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="600" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="15O-NS-Q8S" id="Ig9-bk-a3p">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="79.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Nop-Zt-VI1">
@@ -132,13 +133,46 @@
                                                 <rect key="frame" x="86" y="54" width="205" height="18"/>
                                             </variation>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart" translatesAutoresizingMaskIntoConstraints="NO" id="CON-K6-w6A">
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="28" id="Fo1-UH-U4G"/>
+                                                <constraint firstAttribute="height" constant="28" id="GqB-pe-nJd"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="Hidden" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="Fo1-UH-U4G"/>
+                                                    <exclude reference="GqB-pe-nJd"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="widthClass=compact">
+                                                <mask key="constraints">
+                                                    <include reference="Fo1-UH-U4G"/>
+                                                    <include reference="GqB-pe-nJd"/>
+                                                </mask>
+                                            </variation>
+                                        </imageView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="CON-K6-w6A" firstAttribute="top" secondItem="Ig9-bk-a3p" secondAttribute="topMargin" constant="15" id="Kdq-pl-dKp">
+                                            <variation key="widthClass=compact" constant="5"/>
+                                        </constraint>
+                                        <constraint firstAttribute="trailingMargin" secondItem="CON-K6-w6A" secondAttribute="trailing" constant="15" id="fjb-H5-saQ"/>
+                                    </constraints>
                                     <variation key="default">
                                         <mask key="subviews">
                                             <exclude reference="Nop-Zt-VI1"/>
                                             <exclude reference="f80-US-Lbw"/>
                                             <exclude reference="WJP-6E-N3V"/>
                                             <exclude reference="QEP-mR-Njr"/>
+                                            <exclude reference="CON-K6-w6A"/>
+                                        </mask>
+                                        <mask key="constraints">
+                                            <exclude reference="Kdq-pl-dKp"/>
+                                            <exclude reference="fjb-H5-saQ"/>
                                         </mask>
                                     </variation>
                                     <variation key="widthClass=compact">
@@ -147,10 +181,16 @@
                                             <include reference="f80-US-Lbw"/>
                                             <include reference="WJP-6E-N3V"/>
                                             <include reference="QEP-mR-Njr"/>
+                                            <include reference="CON-K6-w6A"/>
+                                        </mask>
+                                        <mask key="constraints">
+                                            <include reference="Kdq-pl-dKp"/>
+                                            <include reference="fjb-H5-saQ"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="heartImage" destination="CON-K6-w6A" id="7Rc-Cc-9bf"/>
                                     <outlet property="restaurantImage" destination="Nop-Zt-VI1" id="kVv-fc-p8s"/>
                                     <outlet property="restaurantLocation" destination="WJP-6E-N3V" id="MpD-cg-qri"/>
                                     <outlet property="restaurantName" destination="f80-US-Lbw" id="wnd-yc-luI"/>
@@ -169,4 +209,7 @@
             <point key="canvasLocation" x="298.5" y="1048"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="heart" width="64" height="64"/>
+    </resources>
 </document>
