@@ -52,6 +52,7 @@ class RestaurantsTableViewController: UITableViewController {
         return resNameList.count
     }
     
+    /*
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let listMenu = UIAlertController(title: nil, message: "选择", preferredStyle: .ActionSheet)
         let cancalAction = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
@@ -70,7 +71,6 @@ class RestaurantsTableViewController: UITableViewController {
             let cell = tableView.cellForRowAtIndexPath(indexPath)
             cell?.viewWithTag(1)?.hidden = false
             //cell?.accessoryType = UITableViewCellAccessoryType.Checkmark
-            //cell?.accessoryView
             self.resHasBM[indexPath.row] = true
         }
         
@@ -88,6 +88,7 @@ class RestaurantsTableViewController: UITableViewController {
         
         self.presentViewController(listMenu, animated: true, completion: nil)
     }
+     */
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! CustomTableViewCell
@@ -103,7 +104,7 @@ class RestaurantsTableViewController: UITableViewController {
         
         cell.restaurantImage?.image = UIImage(named: resImgList[indexPath.row])
         cell.heartImage.image = UIImage(named: "heart")
-        //cell.bookmarkImage.hidden = !resHasBM[indexPath.row]
+        cell.heartImage.hidden = !resHasBM[indexPath.row];
         return cell
     }
     
@@ -115,17 +116,62 @@ class RestaurantsTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Delete the row from the data source
+            resNameList.removeAtIndex(indexPath.row)
+            resLocation.removeAtIndex(indexPath.row)
+            resType.removeAtIndex(indexPath.row)
+            resImgList.removeAtIndex(indexPath.row)
+            resHasBM.removeAtIndex(indexPath.row)
+            
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
+        
+        //tableView.reloadData()
     }
-    */
+    
+    
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        let shareAction = UITableViewRowAction(style: .Default, title: "分享") { (action, indexPath) in
+            let alert = UIAlertController(title: "分享到", message: "请选择分享社交类型", preferredStyle: .ActionSheet)
+            
+            let wechatAction = UIAlertAction(title: "微信", style: .Default, handler: nil)
+            let weiboAction = UIAlertAction(title: "新浪微博", style: .Default, handler: nil)
+            let twitterAction = UIAlertAction(title: "Twitter", style: .Default, handler: nil)
+            
+            let cancalAction = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
+            
+            alert.addAction(wechatAction)
+            alert.addAction(weiboAction)
+            alert.addAction(twitterAction)
+            alert.addAction(cancalAction)
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+        
+        shareAction.backgroundColor = UIColor.lightGrayColor()
+        
+        let deleteAction = UITableViewRowAction(style: .Default, title: "删除") { (action, indexPath) in
+            self.resNameList.removeAtIndex(indexPath.row)
+            self.resLocation.removeAtIndex(indexPath.row)
+            self.resType.removeAtIndex(indexPath.row)
+            self.resImgList.removeAtIndex(indexPath.row)
+            self.resHasBM.removeAtIndex(indexPath.row)
+            
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+        }
+        
+        
+        return [shareAction,deleteAction]
+    }
+    
+    
+    
 
     /*
     // Override to support rearranging the table view.
@@ -142,14 +188,21 @@ class RestaurantsTableViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "showRestaurantDetail"{
+        let destVC = segue.destinationViewController as! RestaurantDetailViewController
+        destVC.resImageName = resImgList[tableView.indexPathForSelectedRow!.row]
+            destVC.resName = resNameList[tableView.indexPathForSelectedRow!.row]
+            destVC.resType = resType[tableView.indexPathForSelectedRow!.row]
+            destVC.resAdd = resLocation[tableView.indexPathForSelectedRow!.row]
+        }
+        
     }
-    */
+    
 
 }
