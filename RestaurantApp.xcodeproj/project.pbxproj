@@ -16,6 +16,9 @@
 		F80A31801CB88BF600F01E8E /* RestaurantAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80A317F1CB88BF600F01E8E /* RestaurantAppUITests.swift */; };
 		F80A31901CB8AA0300F01E8E /* RestaurantsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80A318F1CB8AA0300F01E8E /* RestaurantsTableViewController.swift */; };
 		F8563D471CBB67A300A58796 /* RestaurantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8563D461CBB67A300A58796 /* RestaurantDetailViewController.swift */; };
+		F8563D491CBB80FB00A58796 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8563D481CBB80FB00A58796 /* Restaurant.swift */; };
+		F897A4001CBB8DA9005F5825 /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F897A3FF1CBB8DA9005F5825 /* DetailTableViewController.swift */; };
+		F897A4021CBB97C2005F5825 /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F897A4011CBB97C2005F5825 /* DetailTableViewCell.swift */; };
 		F8AE68FE1CB8E01B009490E2 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AE68FD1CB8E01B009490E2 /* CustomTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +55,10 @@
 		F80A31811CB88BF600F01E8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F80A318F1CB8AA0300F01E8E /* RestaurantsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantsTableViewController.swift; sourceTree = "<group>"; };
 		F8563D461CBB67A300A58796 /* RestaurantDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantDetailViewController.swift; sourceTree = "<group>"; };
+		F8563D481CBB80FB00A58796 /* Restaurant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
+		F897A3FC1CBB81E0005F5825 /* DemoTest.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = DemoTest.playground; sourceTree = "<group>"; };
+		F897A3FF1CBB8DA9005F5825 /* DetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
+		F897A4011CBB97C2005F5825 /* DetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
 		F8AE68FD1CB8E01B009490E2 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,6 +119,10 @@
 				F80A318F1CB8AA0300F01E8E /* RestaurantsTableViewController.swift */,
 				F8AE68FD1CB8E01B009490E2 /* CustomTableViewCell.swift */,
 				F8563D461CBB67A300A58796 /* RestaurantDetailViewController.swift */,
+				F8563D481CBB80FB00A58796 /* Restaurant.swift */,
+				F897A3FC1CBB81E0005F5825 /* DemoTest.playground */,
+				F897A3FF1CBB8DA9005F5825 /* DetailTableViewController.swift */,
+				F897A4011CBB97C2005F5825 /* DetailTableViewCell.swift */,
 			);
 			path = RestaurantApp;
 			sourceTree = "<group>";
@@ -268,8 +279,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F897A4001CBB8DA9005F5825 /* DetailTableViewController.swift in Sources */,
 				F80A31621CB88BF600F01E8E /* ViewController.swift in Sources */,
+				F897A4021CBB97C2005F5825 /* DetailTableViewCell.swift in Sources */,
 				F80A31601CB88BF600F01E8E /* AppDelegate.swift in Sources */,
+				F8563D491CBB80FB00A58796 /* Restaurant.swift in Sources */,
 				F8563D471CBB67A300A58796 /* RestaurantDetailViewController.swift in Sources */,
 				F8AE68FE1CB8E01B009490E2 /* CustomTableViewCell.swift in Sources */,
 				F80A31901CB8AA0300F01E8E /* RestaurantsTableViewController.swift in Sources */,

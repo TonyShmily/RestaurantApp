@@ -14,16 +14,17 @@ class RestaurantDetailViewController: UIViewController {
     
     @IBOutlet weak var lbName: UILabel!
     @IBOutlet weak var lbType: UILabel!
-    @IBOutlet weak var lbAddress: UILabel!
+    @IBOutlet weak var lbLocation: UILabel!
     
-    var resImageName = "", resName = "", resType = "", resAdd = ""
+    
+    var restaurant: Restaurant!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        restaurantImage.image = UIImage(named: resImageName)
-        lbName.text = resName
-        lbType.text = resType
-        lbAddress.text = resAdd
+        restaurantImage.image = UIImage(named: restaurant.image)
+        lbName.text = restaurant.name
+        lbType.text = restaurant.type
+        lbLocation.text = restaurant.location
         
         // Do any additional setup after loading the view.
     }

@@ -9,7 +9,7 @@
 import UIKit
 
 class RestaurantsTableViewController: UITableViewController {
-
+    /*
     var resNameList = ["咖啡胡同", "霍米", "茶.家", "洛伊斯咖啡", "贝蒂生蚝", "福奇餐馆", "阿波画室", "伯克街面包坊", "黑氏巧克力", "惠灵顿雪梨", "北州", "布鲁克林塔菲", "格雷厄姆大街肉", "华夫饼 & 沃夫", "五叶", "眼光咖啡", "忏悔", "巴拉菲娜", "多尼西亚", "皇家橡树", "泰咖啡"]
     
     var resImgList =
@@ -20,14 +20,47 @@ class RestaurantsTableViewController: UITableViewController {
     var resType = ["咖啡 & 茶店","咖啡", "茶屋", "奥地利式 & 休闲饮料","法式", "面包房", "面包房", "巧克力", "咖啡", "美式 & 海鲜", "美式", "美式","早餐 & 早午餐", "法式 & 茶", "咖啡 & 茶", "拉丁美式", "西班牙式", "西班牙式", "西班牙式", "英式", "泰式"]
     
     var resHasBM = [Bool](count:21,repeatedValue: false)
+     */
+   
     
-    override func prefersStatusBarHidden() -> Bool {
-        return true
+    var RestaurantList = [
+        Restaurant(name: "咖啡胡同", type: "咖啡 & 茶店", location: "香港", image: "cafedeadend.jpg", isVisited: false),
+        Restaurant(name: "霍米", type: "咖啡", location: "香港", image: "homei.jpg", isVisited: false),
+        Restaurant(name: "茶.家", type: "茶屋", location: "香港", image: "teakha.jpg", isVisited: false),
+        Restaurant(name: "洛伊斯咖啡", type: "奥地利式 & 休闲饮料", location: "香港", image: "cafeloisl.jpg", isVisited: false),
+        Restaurant(name: "贝蒂生蚝", type: "法式", location: "香港", image: "petiteoyster.jpg", isVisited: false),
+        Restaurant(name: "福奇餐馆", type: "面包房", location: "香港", image: "forkeerestaurant.jpg", isVisited: false),
+        Restaurant(name: "阿波画室", type: "面包房", location: "香港", image: "posatelier.jpg", isVisited: false),
+        Restaurant(name: "伯克街面包坊", type: "巧克力", location: "悉尼", image: "bourkestreetbakery.jpg", isVisited: false),
+        Restaurant(name: "黑氏巧克力", type: "咖啡", location: "悉尼", image: "haighschocolate.jpg", isVisited: false),
+        Restaurant(name: "惠灵顿雪梨", type: "美式 & 海鲜", location: "悉尼", image: "palominoespresso.jpg", isVisited: false),
+        Restaurant(name: "北州", type: "美式", location: "纽约", image: "upstate.jpg", isVisited: false),
+        Restaurant(name: "布鲁克林塔菲", type: "美式", location: "纽约", image: "traif.jpg", isVisited: false),
+        Restaurant(name: "格雷厄姆大街肉", type: "早餐 & 早午餐", location: "纽约", image: "grahamavenuemeats.jpg", isVisited: false),
+        Restaurant(name: "华夫饼 & 沃夫", type: "法式 & 茶", location: "纽约", image: "wafflewolf.jpg", isVisited: false),
+        Restaurant(name: "五叶", type: "咖啡 & 茶", location: "纽约", image: "fiveleaves.jpg", isVisited: false),
+        Restaurant(name: "眼光咖啡", type: "拉丁美式", location: "纽约", image: "cafelore.jpg", isVisited: false),
+        Restaurant(name: "忏悔", type: "西班牙式", location: "纽约", image: "confessional.jpg", isVisited: false),
+        Restaurant(name: "巴拉菲娜", type: "西班牙式", location: "伦敦", image: "barrafina.jpg", isVisited: false),
+        Restaurant(name: "多尼西亚", type: "西班牙式", location: "伦敦", image: "donostia.jpg", isVisited: false),
+        Restaurant(name: "皇家橡树", type: "英式", location: "伦敦", image: "royaloak.jpg", isVisited: false),
+        Restaurant(name: "泰咖啡", type: "泰式", location: "伦敦", image: "thaicafe.jpg", isVisited: false)
+    ]
+
+    
+    func loadRestaurantInfo(){
+        
+
     }
-    
+//    
+//    override func prefersStatusBarHidden() -> Bool {
+//        return true
+//    }
+//    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -49,7 +82,7 @@ class RestaurantsTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return resNameList.count
+        return RestaurantList.count
     }
     
     /*
@@ -93,18 +126,18 @@ class RestaurantsTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! CustomTableViewCell
 
-        cell.restaurantName?.text = resNameList[indexPath.row]
-        cell.restaurantLocation.text = resLocation[indexPath.row]
-        cell.restaurantType.text = resType[indexPath.row]
+        cell.restaurantName?.text = RestaurantList[indexPath.row].name
+        cell.restaurantLocation.text = RestaurantList[indexPath.row].location
+        cell.restaurantType.text = RestaurantList[indexPath.row].type
         cell.restaurantImage.layer.cornerRadius = 30
             //cell.restaurantImage.frame.size.width / 2
         cell.restaurantImage.clipsToBounds = true
         
         //cell.accessoryType = resHasBM[indexPath.row] ? .Checkmark : .None
         
-        cell.restaurantImage?.image = UIImage(named: resImgList[indexPath.row])
+        cell.restaurantImage?.image = UIImage(named: RestaurantList[indexPath.row].image)
         cell.heartImage.image = UIImage(named: "heart")
-        cell.heartImage.hidden = !resHasBM[indexPath.row];
+        cell.heartImage.hidden = !RestaurantList[indexPath.row].isVisited;
         return cell
     }
     
@@ -121,11 +154,7 @@ class RestaurantsTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Delete the row from the data source
-            resNameList.removeAtIndex(indexPath.row)
-            resLocation.removeAtIndex(indexPath.row)
-            resType.removeAtIndex(indexPath.row)
-            resImgList.removeAtIndex(indexPath.row)
-            resHasBM.removeAtIndex(indexPath.row)
+            RestaurantList.removeAtIndex(indexPath.row)
             
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             
@@ -157,12 +186,7 @@ class RestaurantsTableViewController: UITableViewController {
         shareAction.backgroundColor = UIColor.lightGrayColor()
         
         let deleteAction = UITableViewRowAction(style: .Default, title: "删除") { (action, indexPath) in
-            self.resNameList.removeAtIndex(indexPath.row)
-            self.resLocation.removeAtIndex(indexPath.row)
-            self.resType.removeAtIndex(indexPath.row)
-            self.resImgList.removeAtIndex(indexPath.row)
-            self.resHasBM.removeAtIndex(indexPath.row)
-            
+            self.RestaurantList.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         }
         
@@ -194,12 +218,9 @@ class RestaurantsTableViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        if segue.identifier == "showRestaurantDetail"{
-        let destVC = segue.destinationViewController as! RestaurantDetailViewController
-        destVC.resImageName = resImgList[tableView.indexPathForSelectedRow!.row]
-            destVC.resName = resNameList[tableView.indexPathForSelectedRow!.row]
-            destVC.resType = resType[tableView.indexPathForSelectedRow!.row]
-            destVC.resAdd = resLocation[tableView.indexPathForSelectedRow!.row]
+            if segue.identifier == "showDetail"{
+            let destVC = segue.destinationViewController as! DetailTableViewController
+            destVC.restaurant = RestaurantList[tableView.indexPathForSelectedRow!.row]
         }
         
     }
