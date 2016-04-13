@@ -14,6 +14,17 @@ struct Restaurant {
     var location: String
     var image: String
     var isVisited: Bool
+    var rating = ""
+    
+    init(name: String, type: String, location: String,image: String,isVisited: Bool){
+        self.name = name
+        self.type = type
+        self.location = location
+        self.image = image
+        self.isVisited = isVisited
+    }
+    
+    
 }
 
 //let re = Restaurant(name: <#T##String#>, type: <#T##String#>, location: <#T##String#>, image: <#T##String#>, isVisited: <#T##Bool#>)

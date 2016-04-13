@@ -13,7 +13,8 @@ class DetailTableViewController: UITableViewController {
     var restaurant: Restaurant!
     
     @IBOutlet weak var restaurantImage: UIImageView!
-
+    @IBOutlet weak var ratingBtn: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,10 +30,16 @@ class DetailTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
+        if restaurant.rating != "" {
+            self.ratingBtn.setImage(UIImage(named:  restaurant.rating), forState: .Normal)
+        }
+        
+        
         tableView.estimatedRowHeight = 36
         tableView.rowHeight = UITableViewAutomaticDimension
         
     }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -113,14 +120,26 @@ class DetailTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "showMap"{
+            let destVC = segue.destinationViewController as! MapViewController
+            destVC.restaurant = self.restaurant
+        }
     }
-    */
+ 
 
+    @IBAction func colse(segue: UIStoryboardSegue) {
+        if let reviewVC = segue.sourceViewController as? ReviewViewController {
+            if let rating = reviewVC.rating {
+                self.restaurant.rating = rating
+                self.ratingBtn.setImage((UIImage(named: rating)), forState: .Normal)
+            }
+        }
+        
+    }
+    
 }

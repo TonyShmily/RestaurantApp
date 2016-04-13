@@ -16,7 +16,26 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch" translatesAutoresizingMaskIntoConstraints="NO" id="g3E-Rc-eKL">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="吃货点评" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jdk-Yb-6iY">
+                                <rect key="frame" x="210" y="456" width="180" height="54"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="45"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="g3E-Rc-eKL" firstAttribute="bottom" secondItem="xb3-aO-Qok" secondAttribute="top" id="P8d-tn-MmV"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="Jdk-Yb-6iY" secondAttribute="bottom" constant="90" id="TQW-9F-7xe"/>
+                            <constraint firstItem="g3E-Rc-eKL" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="Vd5-Ge-55e"/>
+                            <constraint firstItem="g3E-Rc-eKL" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="gcC-6G-Tlg"/>
+                            <constraint firstItem="Jdk-Yb-6iY" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="gzH-mn-AgS"/>
+                            <constraint firstAttribute="trailing" secondItem="g3E-Rc-eKL" secondAttribute="trailing" id="o0u-LG-Str"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -24,4 +43,7 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="launch" width="944" height="1080"/>
+    </resources>
 </document>

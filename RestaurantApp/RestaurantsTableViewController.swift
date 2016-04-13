@@ -220,7 +220,6 @@ class RestaurantsTableViewController: UITableViewController {
             let destVC = segue.destinationViewController as! DetailTableViewController
             destVC.restaurant = RestaurantList[tableView.indexPathForSelectedRow!.row]
         }
-        
     }
     
 
