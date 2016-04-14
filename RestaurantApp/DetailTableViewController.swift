@@ -22,16 +22,12 @@ class DetailTableViewController: UITableViewController {
         self.tableView.tableFooterView = UIView(frame: CGRectZero)
         self.tableView.separatorColor = UIColor(white: 0.9, alpha: 1)
         //restaurantImage.frame = CGRectMake(0, 0, 400, 200)
-        restaurantImage.image = UIImage(named: restaurant.image)
+        restaurantImage.image = UIImage(data: restaurant.image!)
         title = restaurant.name
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        if restaurant.rating != "" {
-            self.ratingBtn.setImage(UIImage(named:  restaurant.rating), forState: .Normal)
+        
+        if restaurant.rating != nil {
+            self.ratingBtn.setImage(UIImage(named: restaurant.rating!), forState: .Normal)
         }
         
         
@@ -74,7 +70,7 @@ class DetailTableViewController: UITableViewController {
             cell.valueLable.text = restaurant.location
         case 3:
             cell.fieldLable.text = "是否来过"
-            cell.valueLable.text = restaurant.isVisited ? "来过" : "没有来过"
+            cell.valueLable.text = restaurant.isVisited.boolValue ? "来过" : "没有来过"
         default:
             cell.fieldLable.text = ""
             cell.valueLable.text = ""
@@ -137,6 +133,15 @@ class DetailTableViewController: UITableViewController {
             if let rating = reviewVC.rating {
                 self.restaurant.rating = rating
                 self.ratingBtn.setImage((UIImage(named: rating)), forState: .Normal)
+                
+                let buffer = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
+                do {
+                    try buffer?.save()
+                }
+                catch{
+                    print(error)
+                }
+                
             }
         }
         

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class AddRestaurantController: UITableViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
@@ -16,25 +17,60 @@ class AddRestaurantController: UITableViewController, UINavigationControllerDele
     @IBOutlet weak var tfLocation: UITextField!
     @IBOutlet weak var cbYes: UIButton!
     @IBOutlet weak var cbNo: UIButton!
+    var isVisited = false
     
-    var restaurant = Restaurant(name: "", type: "", location: "", image: "", isVisited: false)
+    var restaurant: Restaurant!
     
     @IBAction func visitedClick(sender: UIButton) {
         switch sender.tag {
         case 100:
-            self.restaurant.isVisited = true
+            isVisited = true
         case 200:
-            self.restaurant.isVisited = false
+            isVisited = false
         default:
-            self.restaurant.isVisited = false
+            isVisited = false
         }
         
-        cbYes.backgroundColor = restaurant.isVisited ? UIColor.orangeColor() :UIColor.lightGrayColor()
-        cbNo.backgroundColor = !restaurant.isVisited ? UIColor.orangeColor() :UIColor.lightGrayColor()
+        cbYes.backgroundColor = isVisited ? UIColor.orangeColor() :UIColor.lightGrayColor()
+        cbNo.backgroundColor = !isVisited ? UIColor.orangeColor() :UIColor.lightGrayColor()
     }
     
-    @IBAction func saveClick(sender: UIButton) {
+    @IBAction func saveClick(sender: UIBarButtonItem) {
+        if tfName.text == "" || tfLocation == "" || tfType.text == "" {
+            let alert = UIAlertView()
+            alert.title = "提示"
+            alert.message = "数据未完整填写，无法保存！"
+            alert.addButtonWithTitle("确定")
+            alert.alertViewStyle = .Default
+            alert.show()
+        }else{
+            getNewResInfo()
+            performSegueWithIdentifier("unwindToHomeList", sender: sender)
+        }
     }
+    
+    func getNewResInfo(){
+        let buffer = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
+        let restaurant = NSEntityDescription.insertNewObjectForEntityForName("Restaurant", inManagedObjectContext: buffer!) as! Restaurant
+        
+        restaurant.name = tfName.text!
+        restaurant.type = tfType.text!
+        restaurant.location = tfLocation.text!
+        restaurant.isVisited = isVisited
+        
+        if let resImage = resImage.image {
+            restaurant.image = UIImagePNGRepresentation(resImage)
+        }
+        
+        do{
+            try buffer?.save()
+            
+        }catch{
+            print(error)
+            return
+        }
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
